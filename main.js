@@ -9,7 +9,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry( 1, 1, 5,5,5,5,5 );
+const geometry = new THREE.BoxGeometry( 1, 2, 4, 2, 4, 8 );
 const material = new THREE.MeshBasicMaterial( { color: 0x049ef4, wireframe:true } );
 const cube = new THREE.Mesh( geometry, material );
 const sceneFog = new THREE.Fog(0x000000, 0.015, 100);
