@@ -19,14 +19,20 @@ const torus = new THREE.Mesh( geometry, material );
 scene.add( torus );
 
 const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5,5,5);
+pointLight.intensity = 150;
+pointLight.position.set(0,0,0);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add(pointLight, ambientLight);
+ambientLight.intensity = 1.5;
+
+const directionalLight = new THREE.DirectionalLight(0xffffff);
+directionalLight.position.set(5,5,5);
+directionalLight.intensity = 1;
+scene.add(pointLight, ambientLight, directionalLight);
 
 const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper);
+//const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(lightHelper);
 
 camera.position.z = 50;
 
@@ -34,7 +40,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 function addStar() { 
     const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-    const material = new THREE.MeshStandardMaterial( { color: 0xFFFFFF } );
+    const material = new THREE.MeshStandardMaterial( { color: Math.random() * 0xFFFFFF << 0 } );
     const star = new THREE.Mesh( geometry, material );
 
     const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
@@ -47,7 +53,7 @@ Array(100).fill().forEach(addStar); // adds random 300 stars to the scene
 
 const avatarTexture = new THREE.TextureLoader().load('avatar.jpg');
 const avatar = new THREE.Mesh(
-    new THREE.BoxGeometry(10, 10, 10),
+    new THREE.BoxGeometry(8,8,8),
     new THREE.MeshBasicMaterial({ map: avatarTexture })
 );
 
